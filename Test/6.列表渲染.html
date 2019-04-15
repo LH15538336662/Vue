@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+</head>
+<body>
+<!--
+1、列表显示
+    -- 数组  v-for / index
+    -- 对象 v-for / key
+2、列表的更新显示
+    -- 删除 item
+    -- 替换 item
+-->
+<div id="demo">
+    <h2>遍历 数组 </h2>
+    <ul>
+        <li v-for="(p,index) in persons" :key="index">
+            {{index}}---{{p.name}}---{{p.age}}--- <button @click="del(index)">删除</button>
+            --- <button @click="update(index,{name:'cat',age:80})">更新</button>
+        </li>
+    </ul>
+    <h2>遍历对象</h2>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el:'#demo',
+        data:{
+            persons:[
+                {name:'Tom',age:18},
+                {name:'Lily',age:19},
+                {name:'Hello',age:20},
+            ]
+        },
+        methods:{
+            //splice的使用
+            /*
+            splice(index,1) 删除
+            splice(index,1,newP) 替换
+            splice(index , 0 ,newP)增加
+             */
+            del(index){
+                this.persons.splice(index,1)
+            },
+            update(index,newP){
+                this.persons.splice(index,1,newP)
+            }
+        }
+    })
+</script>
+</body>
+</html>

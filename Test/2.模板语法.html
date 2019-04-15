@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+1、模板理解
+    -- 动态的html页面
+    --包含了一些js语法代码
+        -- 双大括号表达式
+        -- 指令 以v- 开头的自定义标签属性
+2、双大括号表达式
+    -- 语法 {{exp}} 或 {{{exp}}}
+    -- 功能：向页面输出数据
+    -- 可以调用对象的方法
+3、强制数据绑定
+    -- 功能 ： 指定变化的属性值
+    -- 完整写法
+        -- v-bind:xxx="yyy"
+    -- 简写写法
+        -- :xxx="yyy"
+4、绑定事件监听
+    --功能：绑定指定事件名的回调函数
+    完整写法
+       -- v-on:click="xxx" 如果需要传递参数 v-on:click="xxx(pam)"
+     简写写法
+        -- @click="xxx"
+-->
+
+<div id="app">
+    <h2>双大括号表达式</h2>
+        <p>{{msg}}</p>
+        <p>{{msg.toUpperCase()}}</p>
+        <p v-text="msg"></p>
+        <p v-html="t_tag"></p>
+
+    <h2>强制数据绑定</h2>
+    <p><img v-bind:src="imgUrl" alt=""></p>
+    <p><img :src="imgUrl" alt=""></p>
+    <h2>绑定事件监听</h2>
+    <p><button v-on:click="test1">test1</button></p>
+    <p><button v-on:click="test2('haha')">test2</button></p>
+    <p><button @click="test3(msg)">test3</button></p>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#app',
+        data:{
+            msg:'i will back',
+            t_tag:'<a href="#">i is element</a>',
+            imgUrl:'https://cn.vuejs.org/images/logo.png'
+        },
+        methods:{
+            test1 () {
+                alert('this is test1')
+            },
+
+            test2(val) {
+                alert(val)
+            },
+            test3(msg) {
+                alert(msg)
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

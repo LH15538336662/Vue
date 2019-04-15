@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello world vue</title>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="product">
+    <p>hello {{product}}</p>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //Vue是vue.js提供的一个构造函数
+    const vm = new Vue({ //配置对象（属性名必须是指定的一些名称）
+        el: '#app',
+        data: {
+            product: 'hello world vue'
+        }
+    })
+    vm.product = 'abc'
+</script>
+</body>
+</html>
