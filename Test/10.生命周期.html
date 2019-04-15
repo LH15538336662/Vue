@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+</head>
+<body>
+<!--
+1、vue的生命周期
+    -- 初始化显示
+        -- beforeCreate()
+        -- created()
+        -- beforeMount()
+        -- mounted()
+    -- 更新显示
+        -- beforeUpdate()
+        -- updated()
+    -- 销毁实例 vm.$destory()
+        -- beforeDestory()
+        -- destoryed()
+2、常用的生命周期方法
+    -- created()/mounted() 发送ajax请求，启动定时器等异步任务
+    -- beforeDestory() 做收尾工作，如 清除定时器
+-->
+<div id="demo">
+    <button @click="destoryVM">destory vm</button>
+    <p v-show="isShow">你是我的眼</p>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue({
+        el:'#demo',
+        data:{
+            isShow:true
+        },
+        //初始化阶段
+        beforeCreate(){
+            console.log('beforeCreate()')
+        },
+        created(){
+          console.log('created()')  
+        },
+        beforeMount(){
+            console.log('beforeMount()')
+        }
+        ,
+        mounted(){
+           this.intervalID =  setInterval(()=>{
+                console.log('执行了')
+
+                this.isShow = !this.isShow
+            },1000)
+        },
+
+        //更新阶段
+        beforeUpdate(){
+            console.log('beforeUpdate()')
+        },
+        updated(){
+            console.log('updated()')
+        },
+        //销毁vm实例阶段
+        beforeDestroy(){
+            console.log('beforeDestroy()')
+            clearInterval(this.intervalID)
+        },
+        destroyed(){
+            console.log('destroyed()')
+        }
+        ,
+        methods:{
+            destoryVM(){
+                this.$destroy()
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>
