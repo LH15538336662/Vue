@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+</head>
+<body>
+<!--
+1、注册全局指令
+     Vue.directive('指令名',function(el,binding){
+        el.innerHTML = binding.value.toUpperCase()
+     })
+2、注册局部指令
+    directives:{
+        '指令名':{
+            bind(el,binding){
+                el.innerHTML = binding.value.toupperCase()
+            }
+        }
+    }
+-->
+
+<div id="test">
+    <p v-upper-text="msg1"></p>
+    <p v-lower-text="msg2"></p>
+</div>
+
+<div id="test2">
+    <p v-upper-text="msg1"></p>
+    <p v-lower-text="msg2"></p>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    //注册一个全局指令
+    //el 指令属性所在的标签对象
+    //binding 包含指令信息相关数据的对象
+    Vue.directive('upper-text',(el,binding) => {
+        el.innerHTML = binding.value.toUpperCase()
+    })
+    const vm = new Vue({
+        el:'#test',
+        data:{
+            msg1:'This Is Upper Case',
+            msg2:'This is Lower Case'
+        },
+        directives:{
+            'lower-text':{
+                bind(el,binding){
+                    el.innerHTML = binding.value.toLowerCase()
+                }
+            }
+        }
+    })
+    const vm2 = new Vue({
+        el:'#test2',
+        data:{
+            msg1:'This Is Upper Case',
+            msg2:'This is Lower Case'
+        }
+    })
+</script>
+</body>
+</html>
