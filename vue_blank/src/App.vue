@@ -1,7 +1,12 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <TodoHeader :addTodo="addTodo"/>
+<!--   传递函数属性   -->
+<!--      <TodoHeader :addTodo="addTodo"/>-->
+<!--      自定义事件方式1 -->
+<!--      <TodoHeader @addTodo="addTodo"/>-->
+<!--      自定义事件方式二-->
+      <TodoHeader ref="header"/>
       <TodoList :todos="todos" :delTodo="delTodo"/>
       <todo-footer :todos="todos" :selectAllTodos="selectAllTodos" :deleteCompleteTodos="deleteCompleteTodos"/>
     </div>
@@ -16,6 +21,9 @@ export default {
     return {
       todos:JSON.parse(window.localStorage.getItem('todos_key') || '[]')
     }
+  },
+  mounted(){
+    this.$refs.header.$on('addTodo',this.addTodo)
   },
   watch:{
     todos:{

@@ -6,7 +6,7 @@
 <script>
 export default {
   props:{
-    addTodo:Function
+    // addTodo:Function //函数传递
   },
   data(){
     return {
@@ -24,7 +24,8 @@ export default {
       //2 将数据封装成todo
       const todo = {title,complete:false}
       //3 将数据添加到todos里面
-      this.addTodo(todo)
+      // this.addTodo(todo)
+      this.$emit('addTodo',todo)
       //清除输入
       this.title = ''
     }
