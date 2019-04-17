@@ -3,7 +3,7 @@
     <div class="todo-wrap">
       <TodoHeader :addTodo="addTodo"/>
       <TodoList :todos="todos" :delTodo="delTodo"/>
-      <todo-footer/>
+      <todo-footer :todos="todos" :selectAllTodos="selectAllTodos" :deleteCompleteTodos="deleteCompleteTodos"/>
     </div>
   </div>
 </template>
@@ -14,11 +14,16 @@ import TodoFooter from './components/TodoFooter'
 export default {
   data(){
     return {
-      todos:[
-        {title:'睡觉',complete:false},
-        {title:'吃饭',complete:true},
-        {title:'coding',complete:false}
-      ]
+      todos:JSON.parse(window.localStorage.getItem('todos_key') || '[]')
+    }
+  },
+  watch:{
+    todos:{
+      deep:true,
+      handler(value){
+        //value 是todos最新的值
+        window.localStorage.setItem('todos_key',JSON.stringify(value))
+      }
     }
   },
   methods:{
@@ -27,6 +32,12 @@ export default {
     },
     delTodo(index){
       this.todos.splice(index,1)
+    },
+    deleteCompleteTodos(){
+      this.todos = this.todos.filter(todo => !todo.complete)
+    },
+    selectAllTodos(complete){
+      this.todos.filter(todo => todo.complete = complete)
     }
   },
   components:{
