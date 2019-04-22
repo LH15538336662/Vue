@@ -1,32 +1,21 @@
-    <template>
-      <div>
-        <div v-if="!repName">loading</div>
-        <div v-else>hahahaha <a :href="repUrl">{{repName}}</a></div>
-      </div>
-    </template>
-    <script>
-      export default{
-        data(){
-          return {
-            repUrl:'',
-            repName:''
-          }
-        },
-        mounted(){
-          const url = `https://api.github.com/search/repositories?q=v&sort=stars`
-          this.$http.get(url).then(response => {
-            const result = response.data
-            const mostRepo = result.items[0]
-            this.repUrl = mostRepo.html_url
-            this.repName = mostRepo.name
+<template>
+  <div class="container">
+    <Search/>
+    <user-main></user-main>
 
-          },response => {
-            alert(response)
-          })
-          
-        }
-      }
-    </script>
-    <style>
+  </div>
+</template>
+<script>
+  import Search from './components/Search'
+  import Main from './components/Main'
+  export default{
+    components:{
+      Search,
+      userMain:Main
+    }
+  }
+</script>
+<style>
 
-    </style>
+
+</style>
