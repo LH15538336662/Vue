@@ -1,14 +1,11 @@
 <template>
-  <mt-button type="primary" @click.native="handleClick">test</mt-button>
+  <div>
+sdf
+  </div>
 </template>
 <script>
-  import {Toast} from 'mint-ui'
   export default {
-    methods:{
-      handleClick(){
-        Toast('请求成功')
-      }
-    }
+
   }
 </script>
 <style>
